@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { recupererListesDesProduits } from "../../Api/Products/Product";
 import { Link } from "react-router-dom";
 import ProductSeleton from "../../Components/SkeletonProductListes/ProductSeleton";
+import { Heart } from "lucide-react";
+import redHeart from "../../Assets/Icons/Red-Heart.svg";
 
 export default function ProductList() {
   const [listDesProduits, setListeProduits] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [active, setActive] = useState({ index: 0, value: "TOUTES" });
+  const [articleFavorites, setArticleFavorites] = useState([]);
 
   /**
    * Cette fonction recupere la liste la liste de toutes les produits depuis l'API
@@ -23,6 +26,41 @@ export default function ProductList() {
         setIsloading(false);
         console.log(error);
       });
+  };
+
+  //FAVORIS SECTIONS ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  const loadFavorites = () => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favoris")) || [];
+    setArticleFavorites(storedFavorites);
+  };
+
+  const saveFavorites = (updatedFavorites) => {
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
+  /**
+   * Ajouter un article en favori / si le produit est deja en favori je le retire
+   * @param {number} articleID
+   */
+
+  const toggleFavorite = (article, e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const isFavorite = articleFavorites.some((fav) => fav.id === article.id);
+    let updatedFavorites;
+    if (isFavorite) {
+      updatedFavorites = articleFavorites.filter(
+        (fav) => fav.id !== article.id
+      );
+    } else {
+      updatedFavorites = [...articleFavorites, article];
+    }
+    setArticleFavorites(updatedFavorites);
+    saveFavorites(updatedFavorites);
+  };
+
+  const isFavorite = (articleID) => {
+    return articleFavorites.some((fav) => fav.id === articleID);
   };
 
   const btnTabElements = [
@@ -46,10 +84,15 @@ export default function ProductList() {
       label: "Chaînes",
       value: "CHAINES",
     },
+    {
+      label: "Autres catégories",
+      value: "AUTRES CATEGORIES",
+    },
   ];
 
   useEffect(() => {
     recupererListProduits();
+    loadFavorites();
   }, []);
 
   return (
@@ -72,7 +115,7 @@ export default function ProductList() {
 
         <div>
           <div className="flex items-center justify-center my-2 ">
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3 ">
               {btnTabElements.map((item, index) => (
                 <button
                   key={index}
@@ -84,8 +127,8 @@ export default function ProductList() {
                   }
                   className={`${
                     active.index === index
-                      ? " bg-gray-900 text-white rounded-full h-9 px-4 w-fit text-xs"
-                      : "bg-GenerateRevenueButtonBg border-2 text-xs border-gray-600 text-gray-900 rounded-full h-9 px-4 w-fit"
+                      ? " bg-gray-900 text-white rounded-full h-9  px-4 w-fit text-xs"
+                      : "bg-GenerateRevenueButtonBg border-2 text-xs border-gray-600 text-gray-900 rounded-full h-9 px-4 w-fit text-wrap"
                   } `}
                 >
                   {item.label}
@@ -126,8 +169,7 @@ export default function ProductList() {
             {!isLoading && listDesProduits.length > 0
               ? listDesProduits.map((item) => (
                   <Link to={`products/${item.id}`} key={item.id}>
-                    {" "}
-                    <div className="cursor-pointer w-full h-full border bg-white rounded-md hover:shadow-xl">
+                    <div className="cursor-pointer w-full h-full border bg-white rounded-md hover:shadow-xl relative">
                       <div className=" flex items-center justify-center w-full h-72 rounded-md">
                         <img
                           src={item.image}
@@ -164,6 +206,22 @@ export default function ProductList() {
                           </p>
                         </div>
                       </div>
+
+                      <button
+                        className={`bg-gray-200 rounded-full w-7 h-7 absolute top-2 right-4 flex items-center justify-center`}
+                        onClick={(e) => toggleFavorite(item, e)}
+                      >
+                        {isFavorite(item.id) ? (
+                          <>
+                            <img src={redHeart} alt="" className="w-4 h-4" />
+                          </>
+                        ) : (
+                          <>
+                            {" "}
+                            <Heart className="text-white p-1" />
+                          </>
+                        )}
+                      </button>
                     </div>
                   </Link>
                 ))

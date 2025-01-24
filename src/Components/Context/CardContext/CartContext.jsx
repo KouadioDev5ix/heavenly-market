@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
   });
 
   /**
-   *Ajouter une article dans le panier tout en choisissant la taille
+   *Ajouter une article dans le panier
    * @param {object} product
    * @param {number} quantity
    *
@@ -28,7 +28,6 @@ export const CartProvider = ({ children }) => {
       /**
        * Si le produit est déjà dans le panier, j'augmentte la quantiité
        */
-
       newCart = articlesDuPanier.map((item) =>
         item.id === product.id
           ? { ...item, quantity: item.quantity + quantity }
@@ -36,7 +35,8 @@ export const CartProvider = ({ children }) => {
       );
     } else {
       /**
-       * Sinon,je l4 ajoute au panier
+       * Sinon,je l
+       * 4 ajoute au panier
        */
       newCart = [...articlesDuPanier, { ...product, quantity }];
     }

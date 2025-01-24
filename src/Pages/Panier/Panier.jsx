@@ -20,8 +20,6 @@ export default function Panier() {
    * @param {*} articleID
    */
 
-  // const { removeArticlesFromCart } = useCart();
-
   const removeArticlesFromCart = (articleID) => {
     const updatedItems = itemsInLocal.filter((item) => item.id !== articleID);
     setItemInLocal(updatedItems);
