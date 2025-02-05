@@ -49,7 +49,9 @@ export default function ArticlesFavoris() {
 
   return (
     <div>
-      <h1>C 'est ici la liste des articles favoris :</h1>
+      <div className="mt-5">
+        <h1 className="text-gray-900 font-bold">Mes aritcles préférés:</h1>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,6 @@ root.render(
   <React.StrictMode>
     <CartProvider>
       <Toaster position="top-right" reverseOrder={false} />
-
       <RouterProvider router={AppRoutes} />
     </CartProvider>
   </React.StrictMode>

@@ -148,7 +148,6 @@ export default function DetailDesProduits() {
           </div>
         </div>
       </div>
-
       {/* MODAL POUR AJOUTER AU PANIER  */}
     </div>
   );

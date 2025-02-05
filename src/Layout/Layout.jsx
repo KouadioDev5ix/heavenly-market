@@ -9,7 +9,7 @@ export default function Layout({ children }) {
     <div className="w-full">
       <div className="w-full h-12 bg-[#191919] text-white flex items-center justify-center">
         <h1 className="font-semibold text-lime-50">
-          DE NOUVELE COLLECTION !!!
+          DE NOUVELLE COLLECTION !!!
         </h1>
       </div>
 
@@ -18,8 +18,6 @@ export default function Layout({ children }) {
       <div className="px-4 w-full">{children}</div>
 
       {/* FOOTER SECTIONS */}
-
-      {/* FOOTER */}
       <div className="w-full h-full bg-[#191919] border-t mt-32">
         <div className="w-[95%] mx-auto max-w-screen-2xl pt-12 pb-5">
           <div className="w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-2">

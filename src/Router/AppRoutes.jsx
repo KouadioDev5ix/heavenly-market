@@ -5,6 +5,9 @@ import DetailDesProduits from "../Pages/Detailsdesproduits/DetailDesProdutis";
 import Panier from "../Pages/Panier/Panier";
 import ArticlesFavoris from "../Pages/Favoris/ArticlesFavoris";
 import FinaliserCommande from "../Pages/FinaliserCommande/FinaliserCommande";
+import Account from "../Pages/Account/Account";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import BecomePatner from "../Pages/BecomePatner/BecomePatner";
 
 export const AppRoutes = createHashRouter([
   {
@@ -39,6 +42,32 @@ export const AppRoutes = createHashRouter([
     element: (
       <Layout>
         <ArticlesFavoris />
+      </Layout>
+    ),
+  },
+
+  {
+    path: "/compte",
+    element: (
+      <Layout>
+        <Account />
+      </Layout>
+    ),
+  },
+  {
+    path: "/qui-sommes-nous",
+    element: (
+      <Layout>
+        <AboutUs />
+      </Layout>
+    ),
+  },
+
+  {
+    path: "/devenir-patenaire",
+    element: (
+      <Layout>
+        <BecomePatner />
       </Layout>
     ),
   },

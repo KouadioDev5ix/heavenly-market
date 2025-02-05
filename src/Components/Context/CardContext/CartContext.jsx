@@ -26,6 +26,7 @@ export const CartProvider = ({ children }) => {
 
     if (existingItem) {
       /**
+       * /M/===>
        * Si le produit est déjà dans le panier, j'augmentte la quantiité
        */
       newCart = articlesDuPanier.map((item) =>
@@ -35,8 +36,8 @@ export const CartProvider = ({ children }) => {
       );
     } else {
       /**
-       * Sinon,je l
-       * 4 ajoute au panier
+       * Sinon,je
+       * l'ajoute au panier
        */
       newCart = [...articlesDuPanier, { ...product, quantity }];
     }

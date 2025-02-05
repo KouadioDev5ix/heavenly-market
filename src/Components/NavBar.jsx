@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import Logo from "../Assets/Images/ce5699233cbc0f142250b520d967dff7 (1).png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { CartContext } from "./Context/CardContext/CartContext";
 import { Drawer } from "@mui/material";
 
@@ -79,12 +79,26 @@ export default function NavBar() {
           <Link to={"/"}>
             <img src={Logo} alt="" className="w-12 h-12 rounded-full" />
           </Link>
-          <p className=" hidden md:block cursor-pointer text-gray-950 text-sm">
-            A propos
-          </p>
-          <p className=" hidden md:block cursor-pointer text-gray-950 text-sm">
-            Devenir patenaire
-          </p>
+
+          <NavLink
+            to={"/qui-sommes-nous"}
+            className={({ isActive }) =>
+              isActive ? "text-orange-500" : "text-black"
+            }
+          >
+            <p className=" hidden md:block cursor-pointer text-sm">A propos</p>
+          </NavLink>
+
+          <NavLink
+            to={"/devenir-patenaire"}
+            className={({ isActive }) =>
+              isActive ? "text-orange-500" : "text-black"
+            }
+          >
+            <p className=" hidden md:block cursor-pointer text-sm">
+              Devenir patenaire
+            </p>
+          </NavLink>
         </nav>
 
         <div>
@@ -94,45 +108,54 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center md:gap-2 gap-4 text-sm">
-          <Link className="">
+          <NavLink
+            to={"/compte"}
+            className={({ isActive }) =>
+              isActive ? "text-orange-500" : "text-black"
+            }
+          >
             <div className="cursor-pointer flex items-center gap-1">
               <UserRound className="w-4 h-4" />
-              <span className="hidden md:block text-sm text-black">Compte</span>
+              <span className="hidden md:block text-sm ">Compte</span>
             </div>
-          </Link>
+          </NavLink>
 
-          <Link to={"/favoris"} className="">
+          <NavLink
+            to={"/favoris"}
+            className={({ isActive }) =>
+              isActive ? "text-orange-500" : "text-black"
+            }
+          >
             <div className="cursor-pointer flex items-center gap-1">
               <Heart className="w-4 h-4" />
               <div className="relative">
-                <span className=" hidden md:block text-sm text-black">
-                  {" "}
-                  Favoris
-                </span>
+                <span className=" hidden md:block text-sm"> Favoris</span>
                 <button className="text-xs text-white bg-orange-600 w-4 h-4 absolute top-[-11px] right-[-6px] rounded-full">
                   {" "}
                   0
                 </button>
               </div>
             </div>
-          </Link>
+          </NavLink>
 
-          <Link to={"/panier"} className="">
+          <NavLink
+            to={"/panier"}
+            className={({ isActive }) =>
+              isActive ? "text-orange-500" : "text-black"
+            }
+          >
             <div className="cursor-pointer flex items-center gap-1 ">
               <ShoppingBag className="w-4 h-4" />
 
               <div className="relative">
-                <span className="hidden md:block text-sm text-black">
-                  {" "}
-                  Panier
-                </span>
+                <span className="hidden md:block text-sm"> Panier</span>
                 <button className="text-xs text-white bg-orange-600 w-4 h-4 absolute top-[-11px] right-[-6px] rounded-full">
                   {" "}
                   {articlesTotaleDansLePanier ? articlesTotaleDansLePanier : 0}
                 </button>
               </div>
             </div>
-          </Link>
+          </NavLink>
 
           <div className="block md:hidden" onClick={() => handleOpenDrawer()}>
             <Menu />
