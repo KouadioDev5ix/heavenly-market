@@ -138,7 +138,7 @@ export default function DetailDesProduits() {
               Je fonce
             </button>
             <Link to={"/panier"}>
-              <button className="bg-orange-500 text-white px-6 py-2 rounded-md ">
+              <button className="bg-orange-500 text-white px-4 py-2  md:px-6 md:py-2 rounded-md  ">
                 Aller au panier
               </button>
             </Link>

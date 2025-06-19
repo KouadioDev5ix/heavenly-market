@@ -148,9 +148,9 @@ export default function ProductList() {
               <input
                 type="text"
                 placeholder="Recherhcer un article..."
-                className="input rounded-tr-none rounded-br-none input-bordered input-md w-full max-w-xs"
+                className="input h-10  input-bordered input-md w-full max-w-xs mr-4"
               />
-              <button className="text-white h-12 px-4 font-bold bg-black rounded-tr-md rounded-br-md ">
+              <button className="text-white h-10 px-4 text-xs bg-black rounded-md ">
                 Rechercher
               </button>
             </div>

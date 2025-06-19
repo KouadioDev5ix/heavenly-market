@@ -125,7 +125,7 @@ export default function FinaliserCommande() {
                   value={inputsValue.NOM}
                   type="text"
                   placeholder="Ex: Kouadio "
-                  className="input input-bordered w-full max-w-full"
+                  className="input input-bordered h-10 w-full max-w-full"
                 />
               </label>
 
@@ -145,7 +145,7 @@ export default function FinaliserCommande() {
                   value={inputsValue.PRENOMS}
                   type="text"
                   placeholder="Ex: Kouadio Alfred "
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
             </div>
@@ -167,7 +167,7 @@ export default function FinaliserCommande() {
                   value={inputsValue.NUMERO}
                   type="text"
                   placeholder="Ex: 07 00 00 00 07"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
 
@@ -187,7 +187,7 @@ export default function FinaliserCommande() {
                   }}
                   type="text"
                   placeholder="Ex: 05 85 13 22 12 "
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
 
@@ -207,7 +207,7 @@ export default function FinaliserCommande() {
                   }}
                   type="text"
                   placeholder="Ex: kouadio@gmail.com"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
             </div>
@@ -230,7 +230,7 @@ export default function FinaliserCommande() {
                   }}
                   type="text"
                   placeholder="Ex: Riviera Palmeraie"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
 
@@ -250,7 +250,7 @@ export default function FinaliserCommande() {
                   }}
                   type="text"
                   placeholder="Ex: Guiro"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
             </div>
@@ -273,7 +273,7 @@ export default function FinaliserCommande() {
                   }}
                   type="text"
                   placeholder="Ex: Riviera Palmeraie ¨Pharmarcie Eunika"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
             </div>
@@ -309,7 +309,7 @@ export default function FinaliserCommande() {
                 <input
                   type="text"
                   placeholder="Ex: Riviera Palmeraie"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
 
@@ -322,7 +322,7 @@ export default function FinaliserCommande() {
                 <input
                   type="text"
                   placeholder="Ex: Guiro"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10 input-bordered w-full max-w-full"
                 />
               </label>
             </div>
@@ -338,7 +338,7 @@ export default function FinaliserCommande() {
                 <input
                   type="text"
                   placeholder="Ex: Riviera Palmeraie ¨Pharmarcie Eunika"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10  input-bordered w-full max-w-full"
                 />
               </label>
             </div>
@@ -364,7 +364,7 @@ export default function FinaliserCommande() {
                 <input
                   type="text"
                   placeholder="Ex: Riviera Palmeraie"
-                  className="input input-bordered w-full max-w-full"
+                  className="input h-10  input-bordered w-full max-w-full"
                 />
               </label>
             </div>
@@ -390,7 +390,7 @@ export default function FinaliserCommande() {
                     Moyen de paiement
                   </span>
                 </div>
-                <select className="select select-bordered">
+                <select className="select h-10  select-bordered">
                   <option disabled selected>
                     Selectionner un moyen de paiement
                   </option>
@@ -411,27 +411,28 @@ export default function FinaliserCommande() {
               <input
                 type="text"
                 placeholder="Ex: 07 55 55 55 07"
-                className="input input-bordered w-full max-w-full"
+                className="input h-10 input-bordered w-full max-w-full"
               />
             </label>
 
             <div className="flex items-center gap-2">
-              <span className="flex items-center justify-center w-6 h-6 bg-white rounded-md border text-black">
-                V
-              </span>
-              <h1 className="text-xl font-bold text-black">
+              <input type="checkbox" id="scales" name="scales" />
+              <label
+                for="scales"
+                className=" leading-tight  cursor-pointer text-xs font-bold "
+              >
                 PAYER LA TOTALITE
-              </h1>
+              </label>
             </div>
           </div>
         </div>
 
         {/* SAVE AND VALIDATE */}
         <div className="w-full md:w-1/3 h-fit sticky top-24 rounded-xl border border-gray-200 shadow-sm">
-          <div className=" bg-gray-100 rounded-tr-lg rounded-tl-lg p-2 ">
+          <div className=" bg-gray-100 rounded-tr-lg rounded-tl-lg p-2">
             <h1 className="text-md font-semibold text-gray-900">Presque OK!</h1>
           </div>
-          <div className="p-3 space-y-7 bg-custumGrayForBoxes">
+          <div className="p-3 space-y-4 bg-custumGrayForBoxes">
             <div className="flex items-center justify-between">
               <h1 className="text-gray-600 font-medium text-sm">
                 Total produits ({numberTotalOfItemOrdered})
@@ -463,7 +464,7 @@ export default function FinaliserCommande() {
               className="flex items-center justify-center"
               onClick={handeSubmitForm}
             >
-              <button className="bg-orange-600 text-sm text-white w-80 h-10 px-2 py-2 rounded-md font-semibold cursor-pointer">
+              <button className="bg-orange-600 text-sm text-white w-full h-10 px-2 py-2 rounded-md font-semibold cursor-pointer">
                 Enregistrer et valider
               </button>
             </div>

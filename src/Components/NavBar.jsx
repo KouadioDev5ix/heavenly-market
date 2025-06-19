@@ -62,14 +62,32 @@ export default function NavBar() {
           {/* MENU LIST ITEMS */}
           <div className=" pt-7">
             <hr />
-            <button className="py-2 h-14 flex items-center justify-center  text-black text-lg w-full font-semibold gap-x-1 ">
-              <CircleHelp />A propos
-            </button>
+
+            <NavLink
+              to={"/qui-sommes-nous"}
+              className={({ isActive }) =>
+                isActive ? "text-orange-500" : "text-black"
+              }
+              onClick={() => setOpenDrawer(false)}
+            >
+              <button className="py-2 h-14 flex items-center justify-center  text-black text-lg w-full font-semibold gap-x-1 ">
+                <CircleHelp />A propos
+              </button>
+            </NavLink>
             <hr />
-            <button className="py-2 h-14 flex items-center justify-center  text-black text-lg w-full font-semibold gap-x-1 ">
-              <Handshake />
-              Devenir partenaire
-            </button>
+            <NavLink
+              to={"/devenir-patenaire"}
+              className={({ isActive }) =>
+                isActive ? "text-orange-500" : "text-black"
+              }
+              onClick={() => setOpenDrawer(false)}
+            >
+              <div className="py-2 h-14 flex items-center justify-center  text-black text-lg w-full font-semibold gap-x-1">
+                <Handshake />
+                Devenir partenaire
+              </div>
+            </NavLink>
+            <hr />
           </div>
         </div>
       </Drawer>
@@ -107,7 +125,7 @@ export default function NavBar() {
           </Link>
         </div>
 
-        <div className="flex items-center md:gap-2 gap-4 text-sm">
+        <div className="flex items-center md:gap-2 gap-5 text-sm">
           <NavLink
             to={"/compte"}
             className={({ isActive }) =>
@@ -148,7 +166,7 @@ export default function NavBar() {
               <ShoppingBag className="w-4 h-4" />
 
               <div className="relative">
-                <span className="hidden md:block text-sm"> Panier</span>
+                <span className="hidden md:block text-sm">Panier</span>
                 <button className="text-xs text-white bg-orange-600 w-4 h-4 absolute top-[-11px] right-[-6px] rounded-full">
                   {" "}
                   {articlesTotaleDansLePanier ? articlesTotaleDansLePanier : 0}
