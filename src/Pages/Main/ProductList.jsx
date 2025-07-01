@@ -6,20 +6,48 @@ import { Heart } from "lucide-react";
 import redHeart from "../../Assets/Icons/Red-Heart.svg";
 
 export default function ProductList() {
-  const [listDesProduits, setListeProduits] = useState([]);
+  const [productsData, setProductsData] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [active, setActive] = useState({ index: 0, value: "TOUTES" });
   const [articleFavorites, setArticleFavorites] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [searhParam, setSearchParam] = useState("");
+  const [filterIsActive, setFilterIsActive] = useState(false);
+
+  const btnTabElements = [
+    {
+      label: "Toutes catégories",
+      value: "TOUTES",
+    },
+    {
+      label: "Men's clothing",
+      value: "VESTES",
+    },
+    {
+      label: "Jewelery",
+      value: "T-SHIRT",
+    },
+
+    {
+      label: "Electronics",
+      value: "CHAINES",
+    },
+    {
+      label: "Women's clothing",
+      value: "AUTRES CATEGORIES",
+    },
+  ];
 
   /**
-   * Cette fonction recupere la liste la liste de toutes les produits depuis l'API
+   * Cette fonction recupere la liste la liste de tous les produits depuis l'API
    */
 
   const recupererListProduits = () => {
     setIsloading(true);
     recupererListesDesProduits()
       .then((response) => {
-        setListeProduits(response.data);
+        setProductsData(response.data);
+        setFilterData(response?.data);
         setIsloading(false);
       })
       .catch((error) => {
@@ -28,7 +56,47 @@ export default function ProductList() {
       });
   };
 
-  //FAVORIS SECTIONS ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  /**
+   *
+   * @param {string} param
+   */
+  const searcProduct = () => {
+    if (searhParam.trim() === "") return;
+    setFilterIsActive(true);
+    const filterResults = productsData.filter((item) =>
+      item.title.toLowerCase().includes(searhParam.toLowerCase())
+    );
+    setFilterData(filterResults);
+  };
+
+  /**
+   *
+   */
+
+  const cancelFilter = () => {
+    setSearchParam("");
+    setFilterData(productsData);
+    setFilterIsActive(false);
+  };
+
+  /**
+   * Cette fonction permet de filtrer la liste des articles en fonction de la categorie
+   * @param {string} value
+   *
+   */
+
+  const filterProductByCategory = (value) => {
+    if (value === "Toutes catégories") {
+      setFilterData(productsData);
+    } else {
+      const listUpdated = productsData.filter(
+        (item) => item.category.toLowerCase() === value.toLowerCase()
+      );
+      setFilterData(listUpdated);
+    }
+  };
+
+  //:::::::::::::::FAVORIS SECTIONS ::::::::::::::::::::::::::::::::::::::::::::::::::::::
   const loadFavorites = () => {
     const storedFavorites = JSON.parse(localStorage.getItem("favoris")) || [];
     setArticleFavorites(storedFavorites);
@@ -59,36 +127,15 @@ export default function ProductList() {
     saveFavorites(updatedFavorites);
   };
 
+  /**
+   *
+   * @param {*} articleID
+   * @returns
+   */
+
   const isFavorite = (articleID) => {
     return articleFavorites.some((fav) => fav.id === articleID);
   };
-
-  const btnTabElements = [
-    {
-      label: "Toutes catégories",
-      value: "TOUTES",
-    },
-    {
-      label: "Vestes",
-      value: "VESTES",
-    },
-    {
-      label: "T-shirt",
-      value: "T-SHIRT",
-    },
-    {
-      label: "Electroniques",
-      value: "ELECTRONIQUE",
-    },
-    {
-      label: "Chaînes",
-      value: "CHAINES",
-    },
-    {
-      label: "Autres catégories",
-      value: "AUTRES CATEGORIES",
-    },
-  ];
 
   useEffect(() => {
     recupererListProduits();
@@ -103,11 +150,15 @@ export default function ProductList() {
             GADGETS COLLECTION
           </h1>
 
-          <p className="my-5 text-sm font-semibold text-gray-600 w-full md:w-1/2 mx-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-            ducimus nobis obcaecati ullam nesciunt eum eligendi, tempora
-            consequatur, assumenda numquam sed facilis eveniet earum a dolore
-            minima hic enim architecto!
+          <p className="my-5 text-sm font-semibold text-gray-700 w-full md:w-1/2 mx-auto">
+            Découvrez notre univers de gadgets tendances et innovants ! Plongez
+            dans une collection pensée pour vous simplifier la vie et booster
+            votre quotidien. Que vous soyez à la recherche d’accessoires
+            high-tech, de vêtements stylés ou de bijoux élégants, vous trouverez
+            ici des produits uniques, sélectionnés avec soin. Faites-vous
+            plaisir en quelques clics et profitez d’une expérience shopping
+            rapide, intuitive et sécurisée. Les nouveautés vous attendent, ne
+            passez pas à côté !
           </p>
         </div>
 
@@ -118,16 +169,18 @@ export default function ProductList() {
             <div className="flex flex-wrap gap-3 ">
               {btnTabElements.map((item, index) => (
                 <button
+                  disabled={isLoading}
                   key={index}
-                  onClick={() =>
+                  onClick={() => {
                     setActive({
                       index: index,
                       value: item.value,
-                    })
-                  }
+                    });
+                    filterProductByCategory(item.label);
+                  }}
                   className={`${
                     active.index === index
-                      ? " bg-gray-900 text-white rounded-full h-9  px-4 w-fit text-xs"
+                      ? " bg-gray-900 text-white rounded-full h-9 px-4 w-fit text-xs"
                       : "bg-GenerateRevenueButtonBg border-2 text-xs border-gray-600 text-gray-900 rounded-full h-9 px-4 w-fit text-wrap"
                   } `}
                 >
@@ -144,13 +197,29 @@ export default function ProductList() {
             <h1 className="sm:text-lg md:text-2xl font-extrabold text-orange-600">
               DISPONILBES POUR-VOUS!
             </h1>
-            <div className="flex">
+            <div className="flex gap-2">
               <input
+                disabled={isLoading}
+                value={searhParam}
+                onChange={(e) => setSearchParam(e.target.value)}
                 type="text"
                 placeholder="Recherhcer un article..."
                 className="input h-10  input-bordered input-md w-full max-w-xs mr-4"
               />
-              <button className="text-white h-10 px-4 text-xs bg-black rounded-md ">
+
+              {filterIsActive && (
+                <button
+                  className="text-white h-10 px-4 text-xs bg-red-600 rounded-md"
+                  onClick={cancelFilter}
+                >
+                  Annuler
+                </button>
+              )}
+              <button
+                className="text-white h-10 px-4 text-xs bg-black rounded-md "
+                onClick={searcProduct}
+                disabled={isLoading}
+              >
                 Rechercher
               </button>
             </div>
@@ -159,15 +228,15 @@ export default function ProductList() {
           {/* ARITICLES AVAILLABLE */}
 
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {isLoading && listDesProduits.length === 0
+            {isLoading && productsData.length === 0
               ? [
                   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                   19, 20,
                 ].map((_, index) => <ProductSeleton key={index} />)
               : null}
 
-            {!isLoading && listDesProduits.length > 0
-              ? listDesProduits.map((item) => (
+            {!isLoading && filterData.length > 0
+              ? filterData.map((item) => (
                   <Link to={`products/${item.id}`} key={item.id}>
                     <div className="cursor-pointer w-full h-full border bg-white rounded-md hover:shadow-xl relative">
                       <div className=" flex items-center justify-center w-full h-72 rounded-md">
@@ -227,11 +296,23 @@ export default function ProductList() {
                 ))
               : null}
 
-            {listDesProduits.length === 0 && !isLoading ? (
-              <div className=" col-span-full text-center text-gray-600 font-semibold text-lg">
-                <h1>Oups désolé, aucun article trouvé...!!!</h1>
+            {filterData.length === 0 && !isLoading ? (
+              <div className="col-span-full text-center text-red-600 font-semibold text-base">
+                <h1>Oups, aucun article trouvé...!!!</h1>
               </div>
             ) : null}
+            {/* 
+            {filterData.length === 0 &&
+            searhParam.trim() !== "" &&
+            !isLoading ? (
+              <div className="col-span-full text-center text-gray-600 font-semibold ">
+                <p className="text-red-500 font-semibold">
+                  Oups, aucun résultat trouvé pour&nbsp;
+                  <span className=" font-bold text-base"> " {searhParam}"</span>
+                  .
+                </p>
+              </div>
+            ) : null} */}
           </div>
         </div>
       </div>

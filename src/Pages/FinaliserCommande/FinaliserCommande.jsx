@@ -1,7 +1,11 @@
 import { ChevronLeft } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  CartContext,
+  useCart,
+} from "../../Components/Context/CardContext/CartContext";
 
 export default function FinaliserCommande() {
   const [itemsInLocal, setItemInLocal] = useState([]);
@@ -16,8 +20,15 @@ export default function FinaliserCommande() {
     ADDRESSE_LIVRAISON: "",
   });
   const [isFormSumitted, setIsFormSumitted] = useState(false);
+  let { addItemsToCard, articlesDuPanier } = useCart();
 
   const removeItem = setItemInLocal;
+
+  const navigate = useNavigate();
+
+  const updateCart = () => {
+    articlesDuPanier = [];
+  };
 
   /**
    * handleInputChange()
@@ -56,10 +67,14 @@ export default function FinaliserCommande() {
       toast.error("Veuillez au moins renseigner le nom et le prenoms");
       setIsFormSumitted(false);
     } else {
-      console.log(inputsValue);
-      clearInputValuesAfterSubmitedForm();
       setIsFormSumitted(true);
-      toast.success("Votre commande a été enregistrer avec succes");
+      setTimeout(() => {
+        toast.success("Votre commande a été enregistrer avec succes");
+        clearInputValuesAfterSubmitedForm();
+        navigate("/commande-enregistree");
+
+        setIsFormSumitted(false);
+      }, 3000);
 
       localStorage.removeItem("cart");
     }
@@ -464,9 +479,20 @@ export default function FinaliserCommande() {
               className="flex items-center justify-center"
               onClick={handeSubmitForm}
             >
-              <button className="bg-orange-600 text-sm text-white w-full h-10 px-2 py-2 rounded-md font-semibold cursor-pointer">
-                Enregistrer et valider
-              </button>
+              <div className="w-full">
+                {isFormSumitted ? (
+                  <div className="bg-orange-600 w-full rounded-md  h-10 px-2 py-2 flex items-center justify-center ">
+                    <button
+                      className="loading loading-spinner loading-md text-white "
+                      disabled={isFormSumitted ? true : false}
+                    ></button>
+                  </div>
+                ) : (
+                  <button className="bg-orange-600 text-sm text-white w-full h-10 px-2 py-2 rounded-md font-semibold cursor-pointer">
+                    Enregistrer et valider
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

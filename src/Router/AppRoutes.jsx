@@ -8,6 +8,7 @@ import FinaliserCommande from "../Pages/FinaliserCommande/FinaliserCommande";
 import Account from "../Pages/Account/Account";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import BecomePatner from "../Pages/BecomePatner/BecomePatner";
+import CommandeSave from "../Pages/Success/CommandeSave";
 
 export const AppRoutes = createHashRouter([
   {
@@ -62,7 +63,6 @@ export const AppRoutes = createHashRouter([
       </Layout>
     ),
   },
-
   {
     path: "/devenir-patenaire",
     element: (
@@ -77,6 +77,15 @@ export const AppRoutes = createHashRouter([
     element: (
       <Layout>
         <FinaliserCommande />
+      </Layout>
+    ),
+  },
+
+  {
+    path: "/commande-enregistree",
+    element: (
+      <Layout>
+        <CommandeSave />
       </Layout>
     ),
   },

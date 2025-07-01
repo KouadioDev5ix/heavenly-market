@@ -43,10 +43,14 @@ export default function Panier() {
           <EmptyCart />
         </>
       )}
-      <div className="flex items-start flex-col md:flex-row gap-6 ">
+      <div className="flex items-start flex-col md:flex-row gap-6 w-full ">
         {/* Section gauche : Liste des articles */}
 
-        <div className={`${itemsInLocal.length === 0 ? "hidden" : "flex-1"}`}>
+        <div
+          className={`${
+            itemsInLocal.length === 0 ? "hidden" : "flex-1 w-full"
+          }`}
+        >
           <h1 className="text-xl font-bold my-4">
             Mon panier ({itemsInLocal.length})
           </h1>
@@ -73,13 +77,13 @@ export default function Panier() {
 
                 <div className="flex-1">
                   <h2 className="text-sm font-extrabold text-gray-800  ">
-                    {item.category.toUpperCase()}
+                    {item?.category?.toUpperCase()}
                   </h2>
                   <h2 className="text-sm font-bold text-gray-500 ">
                     {item.title}
                   </h2>
                   <p className="text-sm text-gray-500">
-                    [{item.rating.rate}] | Notes: {item.rating.count}
+                    [{item?.rating?.rate}] | Notes: {item?.rating?.count}
                   </p>
                   <p className="text-xs text-red-500">
                     ⚠ En cours de rupture de Stock
@@ -89,17 +93,17 @@ export default function Panier() {
                 <div className="">
                   <div className="flex flex-col items-center">
                     <p className="text-lg font-bold text-orange-500">
-                      {item?.price.toLocaleString()} FCFA
+                      {item?.price?.toLocaleString()} FCFA
                     </p>
                     <p className="text-sm text-gray-400 line-through"></p>
-                    <p className="text-xs text-green-600">{item.discount}</p>
+                    <p className="text-xs text-green-600">{item?.discount}</p>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button className="w-8 h-8 flex items-center justify-center bg-gray-600 text-white rounded">
                       -
                     </button>
-                    <span>{item.quantity}</span>
+                    <span>{item?.quantity}</span>
                     <button className="w-8 h-8 flex items-center justify-center bg-orange-600 text-white rounded">
                       +
                     </button>
@@ -127,7 +131,7 @@ export default function Panier() {
             <p className="text-sm text-green-600 mb-4">Livraison 1000 FCFA</p>
             <Link to={"/finaliser-commande"}>
               <button className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
-                Commander ({total.toLocaleString()} FCFA)
+                Commander ({total?.toLocaleString()} FCFA)
               </button>
             </Link>
 
