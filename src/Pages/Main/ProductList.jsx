@@ -153,12 +153,7 @@ export default function ProductList() {
           <p className="my-5 text-sm font-semibold text-gray-700 w-full md:w-1/2 mx-auto">
             Découvrez notre univers de gadgets tendances et innovants ! Plongez
             dans une collection pensée pour vous simplifier la vie et booster
-            votre quotidien. Que vous soyez à la recherche d’accessoires
-            high-tech, de vêtements stylés ou de bijoux élégants, vous trouverez
-            ici des produits uniques, sélectionnés avec soin. Faites-vous
-            plaisir en quelques clics et profitez d’une expérience shopping
-            rapide, intuitive et sécurisée. Les nouveautés vous attendent, ne
-            passez pas à côté !
+            votre quotidien.
           </p>
         </div>
 

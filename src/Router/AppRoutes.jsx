@@ -19,7 +19,7 @@ export const AppRoutes = createHashRouter([
       </Layout>
     ),
   },
-
+  
   {
     path: "/products/:productID",
     element: (
@@ -55,6 +55,7 @@ export const AppRoutes = createHashRouter([
       </Layout>
     ),
   },
+
   {
     path: "/qui-sommes-nous",
     element: (

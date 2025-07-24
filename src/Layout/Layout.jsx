@@ -15,10 +15,10 @@ export default function Layout({ children }) {
 
       <NavBar />
 
-      <div className="px-4 flex-grow w-full">{children}</div>
+      <div className="px-4 flex-grow w-full h-full">{children}</div>
 
       {/* FOOTER SECTIONS */}
-      <div className="w-full h-full bg-[#191919] border-t mt-32">
+      <div className="w-full h-full bg-[rgb(25,25,25)] border-t mt-32">
         <div className="w-[95%] mx-auto max-w-screen-2xl pt-12 pb-5">
           <div className="w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-2">
             <div className="space-y-3">

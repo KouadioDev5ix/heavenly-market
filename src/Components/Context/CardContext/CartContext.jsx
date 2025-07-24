@@ -25,10 +25,6 @@ export const CartProvider = ({ children }) => {
     let newCart;
 
     if (existingItem) {
-      /**
-       * /M/===>
-       * Si le produit est déjà dans le panier, j'augmentte la quantiité
-       */
       newCart = articlesDuPanier.map((item) =>
         item.id === product.id
           ? { ...item, quantity: item.quantity + quantity }
