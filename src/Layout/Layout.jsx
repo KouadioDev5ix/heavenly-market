@@ -28,9 +28,11 @@ export default function Layout({ children }) {
                 <img src={logo} alt="" className="w-16" />
               </a>
               <p className="text-sm text-gray-300 font-normal">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel,
-                officia modi aliquam voluptates hic voluptate tempore! Hic id q
-                esse ea vero!
+                {/* 123 Rue de l'exemple, Abidjan, Côte d'Ivoire */}
+                {/* Je veux une petite description de l'entreprise ici. */}
+                Bienvenue chez Heavenly Market, votre destination ultime pour la mode
+                tendance et abordable. Découvrez nos collections exclusives et
+                exprimez votre style unique avec nous.
               </p>
               <p className="text-gray-300 text-sm font-medium font-paragraph">
                 +225 0585132212 - contact@gmail.com
