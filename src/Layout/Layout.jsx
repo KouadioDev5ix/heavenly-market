@@ -15,7 +15,9 @@ export default function Layout({ children }) {
 
       <NavBar />
 
-      <div className="px-4 flex-grow w-full h-full">{children}</div>
+      <main className="px-4 flex-grow w-full h-full">
+        <div>{children}</div>
+      </main>
 
       {/* FOOTER SECTIONS */}
       <div className="w-full h-full bg-[rgb(25,25,25)] border-t mt-32">
